@@ -1,0 +1,7 @@
+{
+    "editor.fontLigatures": true,
+    "[json]": {
+        "editor.fontFamily": "Fira Code",
+    },
+    "workbench.settings.useSplitJSON": true
+}
