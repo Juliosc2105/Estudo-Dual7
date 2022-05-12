@@ -8,9 +8,6 @@ let Pagina2 = (props) => {
         <Visual>
             <div className='bg- text-light p-5'>
                 <h1>Página Inicial</h1>
-                <Componente>
-
-                </Componente>
                 <Link href='pagina-registro' passHref>
                     <button className="btn btn-outline-warning m-2">
                         Registro
@@ -22,7 +19,6 @@ let Pagina2 = (props) => {
                     </button>
                 
                 </Link>
-                buto
             </div>
         </Visual>
     )

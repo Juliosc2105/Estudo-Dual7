@@ -28,9 +28,6 @@ let criarConexao = async () => {
         'mongodb://127.0.0.1:27017/teste2',
         {useUnifiedTopology: true, useNewUrlParser: true}
     )
-
-    //comentario
-    
     return conexao
 }
 export default criarConexao

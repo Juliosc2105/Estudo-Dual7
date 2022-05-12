@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'
 import criarConexao from '../rotinas/basico'
 
-let colecaoClientes = async (req, res) => {
+let colecaoClientes = async () => {
     let conexao = await criarConexao()
 
     let odm = new mongoose.Schema({

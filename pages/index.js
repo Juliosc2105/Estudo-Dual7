@@ -35,6 +35,9 @@ export default function Home() {
                         <Link href='/sis/clientes/0' passHref>
                             <button className='btn btn-outline-warning m-2'>Clientes</button>
                         </Link>
+                        <Link href='/sis/produtos/0' passHref>
+                            <button className='btn btn-outline-warning m-2'>Produtos</button>
+                        </Link>
                     </div>
                 </p>
             </div>             

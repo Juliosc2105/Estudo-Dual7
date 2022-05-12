@@ -3,33 +3,34 @@ import { useEffect } from 'react'
 import Visual from '../../componentes/visual'
 import api from '../../rotinas/api'
 import Respform from '../../componentes/respform'
-import Cadastrar from '../../componentes/cadastrar'
+import CadastrarProdutos from '../../componentes/cadastrarProdutos'
 
-let Clientes = (props) => {
 
-    let [obterNome, definirNome] = useState(props.variavel)
+let Produtos = (props) => {
+
+    let [obterNomeProduto, definirNomeProduto] = useState(props.variavel)
     let [obterDados, definirDados] = useState({})
 
     useEffect(() => {
-
-        if(obterNome) {
-            let consultar = async () => {
-                let {data: dados} = await api({
-                    login: 'julio', senha: '123'
-                }).post(
-                    'clientes/consultar', //para get e post 
-                    {
-                        nomeCliente: obterNome
-                    } //para post
-                )
-                definirDados(dados[0])
-            }
-            consultar()
+        let consultar = async () => {
+            let {data: dados} = await api({
+                login: 'julio', senha: '123'
+            }).post(
+                'produtos/consultar',
+                {
+                    nomeProduto: obterNomeProduto
+                }
+            )
+            definirDados(dados[0])
         }
-    }, [obterNome])
+        consultar()
+
+    }, [obterNomeProduto])
 
     return (
         <Visual>
+            
+            <h1>Produtos</h1>
             <div name='Verificar'>
                 <div className='d-flex justify-content-center'>
                     <div className='d-flex justify-content-center'>
@@ -39,27 +40,26 @@ let Clientes = (props) => {
                         type="text"
                         placeholder='Nome do cliente'
                         id=""
-                        value={obterNome}
+                        value={obterNomeProduto}
                         onChange={(campo) => {
-                            definirNome(campo.target.value)
+                            definirNomeProduto(campo.target.value)
                         }} />
                     </div>
                 </div>
                 
-                    {obterDados?.nome === obterNome
+                    {obterDados?.nome === obterNomeProduto
                     ?
                     <Respform nome={obterDados.nome} email={obterDados.email} telefone={obterDados.telefone}/>
                     :<div></div>}
             </div>
-            <div name='Cadastar'>
-            <Cadastrar api='clientes'/>
-            </div>
+            <CadastrarProdutos api='produtos'>
+            </CadastrarProdutos>
         </Visual>
     )
 }
 
 export let getServerSideProps = (context) => {
-    return { props: { variavel: context.query.clientes } }
+    return { props: { variavel: context.query.produtos } }
 }
 
-export default Clientes
+export default Produtos
