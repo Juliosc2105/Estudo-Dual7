@@ -29,6 +29,8 @@ let criarConexao = async () => {
         {useUnifiedTopology: true, useNewUrlParser: true}
     )
 
+    //comentario
+    
     return conexao
 }
 export default criarConexao
