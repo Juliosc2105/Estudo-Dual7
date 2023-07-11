@@ -8,7 +8,6 @@ let Teste2 = (props) => {
     let [obterAnimal, definirAnimal] = useState()
     let [obterNomeAluno, definirNomeAluno] = useState()
 
-
     let pessoas = {
         pessoa0: {
             tipo: 'documento',
@@ -139,11 +138,6 @@ let Teste2 = (props) => {
         }
     ]
     
-    //Criar uma função que soma dois números
-    let somar = (num1, num2) => {
-        return num1 + num2
-    }
-    
     //função para procurar o nome da pessoa
     let procurarNome = (nome) => {
         let retorno = 'O nome não foi encontrado'
@@ -168,13 +162,6 @@ let Teste2 = (props) => {
                 retorno = `A cidade ${cidade} foi encontrada`
             }           
         })
-        /*if(cidades[1] === cidade)
-        {
-            retorno = `A cidade ${cidade} foi encontrada`
-        }else
-        {
-            retorno = `A cidade na posição 1 é ${cidades[8]}`
-        }*/
         return retorno
     }
 
@@ -209,23 +196,18 @@ let Teste2 = (props) => {
         return retorno
     }
 
-    let funcao = (num1, num2, callback) => {
-        let objeto = undefined
-        num1 = objeto?.num1 || 100
-        let soma = num1 + num2
-        let resultado = callback ? callback(soma) : soma
+    let funcao = (num1, num2, callback) => { //função que recebe dois números e uma função
+        let objeto = undefined   //variável indefinida
+        num1 = objeto?.num1 || 100 //se num1 for undefined, atribui 100
+        let soma = num1 + num2 //soma os números
+        let resultado = callback ? callback(soma) : soma //se callback for undefined, retorna soma, senão retorna o resultado da função
 
-        let logico = ''
-
-        if(!logico){
-            true
-        }
-
-        if(callback !== undefined){
-            resultado = callback(soma)
-        } else {
-            resultado = soma
-        }
+        //Mesma coisa que:
+            /*if(callback !== undefined){ 
+                resultado = callback(soma)
+            } else {
+                resultado = soma
+            }*/
 
         return resultado
     }
@@ -257,7 +239,6 @@ let Teste2 = (props) => {
     //contrução do html
     return (
         <Visual>
-
             <div 
             style={{
                 display: 'flex',
@@ -426,12 +407,4 @@ let Teste2 = (props) => {
     )
 }
 
-let verificar = (numero) => {
-    if (numero > 10) {
-        return 'Maior que 10'
-    }
-    else if (numero < 10) {
-        return 'Menor que 10'
-    }
-}
 export default Teste2

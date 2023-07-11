@@ -1,29 +1,31 @@
-import colecaoProdutos from '../../colecoes/produtos'
+import colecaoProdutos from '../../colecoes/produtos'   //Importa a coleção de produtos
 
-let Produtos = async (req, res) => {
+let Produtos = async (req, res) => {                    //Função que gerenciará a requisição
+    
+    let variavel = req.query.produtos                   //Pega o valor da variável produtos
 
-    let produtos = await colecaoProdutos()
+    let produtos = colecaoProdutos()                    //Cria a coleção de produtos
 
-    let retorno = {}
+    let retorno = {}                                    //Objeto que será retornado
 
     
-    if(variavel === 'consultar') {
-        let retProduto = await produtos.find({
-            nome: req.body.nomeProduto
-            })
-        retorno = JASON.stringfy(retProduto)
+    if(variavel === 'consultar') {                      //Se o valor da variável for igual a consultar
+        let retProduto = await produtos.find({          //Busca todos os produtos
+            nome: req.body.nomeProduto                  //Pega o nome do produto
+            }) 
+        retorno = retProduto                            //Retorna o produto
     }
 
-    if(variavel === 'gravar') {
-        let retProduto = await produtos.insertMany({
-            nome: req.body.nomeCadastro,
-            descricao: req.body.descricaoCadastro,
-            preco: req.body.precoCadastro,
-            quantidade: req.body.quantidadeCadastro
+    if(variavel === 'gravar') {                         //Se o valor da variável for igual a gravar
+        let retProduto = await produtos.insertMany({    //Insere os produtos
+            nome: req.body.nomeCadastro,                //Pega o nome do produto
+            descricao: req.body.descricaoCadastro,      //Pega a descrição do produto
+            preco: req.body.precoCadastro,              //Pega o preço do produto
+            quantidade: req.body.quantidadeCadastro     //Pega a quantidade do produto
             })
     }
 
-    res.status(200).json(retorno)
+    res.status(200).json(retorno)                       //Retorna o objeto
 
 }
 

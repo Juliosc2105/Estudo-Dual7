@@ -1,28 +1,7 @@
 import mongoose from 'mongoose'
 
-/*
-export let mostrarCadastro = (obterCadastro) => {
-    let retorno = ''
-    let a
-    for (let i in obterCadastro) {
-        a = (
-        <p>
-            {obterCadastro[a].produto}; {obterCadastro[a].quantidade}
-            {a}
-        </p>
-        )
-        retorno = a
-    }
-    return retorno
-} 
-*/
-
-export let soma = (a, b) => {
-    return parseInt(a) + parseInt(b)
-}
-
-
-let criarConexao = async () => {
+//Criar conexão com o banco de dados
+let criarConexao = () => {
 
     let conexao = mongoose.createConnection(
         'mongodb://127.0.0.1:27017/teste2',
@@ -31,3 +10,4 @@ let criarConexao = async () => {
     return conexao
 }
 export default criarConexao
+

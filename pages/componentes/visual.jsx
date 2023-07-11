@@ -1,4 +1,3 @@
-import { loadGetInitialProps } from "next/dist/shared/lib/utils"
 import Head from "next/head"
 import Script from "next/script"
 

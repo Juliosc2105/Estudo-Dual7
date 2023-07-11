@@ -12,15 +12,20 @@ let CadastrarProdutos = (props) => {
 
     return (
         <Visual>
-            <div>
-                <input 
-                    type='text' 
+            <div 
+                className='d-flex flex-column p-2 align-items-center'
+                style={{width:'500px'}}>
+                <input
+                    className='form-control m-1'
+                    type='text'
                     placeholder='Produto'
                     value={obterNomeCadastro}
                     onChange={(campo) =>{
                         definirNomeCadastro(campo.target.value)
                     } } />
+
                 <input
+                    className='form-control m-1'    
                     type='text'
                     placeholder='Descrição'
                     value={obterDescricaoCadastro}
@@ -28,6 +33,7 @@ let CadastrarProdutos = (props) => {
                         definirDescricaoCadastro(campo.target.value)
                     }}/>
                 <input
+                    className='form-control m-1'
                     type='number'
                     placeholder='Preço'
                     value={obterPrecoCadastro}
@@ -35,6 +41,7 @@ let CadastrarProdutos = (props) => {
                         definirPrecoCadastro(campo.target.value)
                     }}/>
                 <input
+                    className='form-control m-1'
                     type='number'
                     placeholder='Quantidade'
                     value={obterQuantidadeCadastro}
@@ -43,7 +50,7 @@ let CadastrarProdutos = (props) => {
                     }}/>
                 <Botao
                     tipo=''
-                    tamanho='pequeno'
+                    tamanho='grande'
                     aoClicar={async () => {
                         let {data: dados} = await api({
                             login: 'julio', senha: '123'
@@ -56,7 +63,11 @@ let CadastrarProdutos = (props) => {
                                 quantidadeCadastro: obterQuantidadeCadastro
                             }
                         )
-                        alert(JSON.stringify(dados))
+                        alert('Dados gravados com sucesso')
+                        definirDescricaoCadastro('')
+                        definirPrecoCadastro('')
+                        definirQuantidadeCadastro('')
+                        definirNomeCadastro('')
                     }}
                 >Cadastrar</Botao>
             </div>

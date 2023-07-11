@@ -6,59 +6,67 @@ import Respform from '../../componentes/respform'
 import CadastrarProdutos from '../../componentes/cadastrarProdutos'
 
 
-let Produtos = (props) => {
+let Produtos = (props) => {                                     //Função que retorna o html da página
 
-    let [obterNomeProduto, definirNomeProduto] = useState(props.variavel)
-    let [obterDados, definirDados] = useState({})
+    let [obterNomeProduto, definirNomeProduto] = useState('')   //Definindo o estado do nome do produto
+    let [obterDados, definirDados] = useState({})               //Definindo o estado do dados
 
-    useEffect(() => {
-        let consultar = async () => {
-            let {data: dados} = await api({
-                login: 'julio', senha: '123'
-            }).post(
-                'produtos/consultar',
-                {
+    useEffect(() => {                                           //Função que executa quando o estado é alterado
+        let consultar = async () => {                           //Função que consulta a api
+            let {data: dados} = await api({                     //Função que pega os dados da api
+                login: 'julio', senha: '123'                    //Dados de login
+            }).post(                                            //Função que faz a requisição
+                'produtos/consultar',                           //Para get e post
+                {  
                     nomeProduto: obterNomeProduto
-                }
+                }                                               //Para post
             )
-            definirDados(dados[0])
+            definirDados(dados[0])                              //Define o estado do dados com os dados da api
         }
-        consultar()
+        consultar()                                             //Executa a função consultar
 
-    }, [obterNomeProduto])
+    }, [obterNomeProduto])                                      //Variável que define quando o estado é alterado
 
-    return (
+    return (                                                    //Retorna o html da página
         <Visual>
-            
-            <h1>Produtos</h1>
-            <div name='Verificar'>
-                <div className='d-flex justify-content-center'>
+            {/*centralizar div com bootstrap */}
+            <div className='d-flex flex-column pt-5 p-3'>
+                <div name='Verificar'>
                     <div className='d-flex justify-content-center'>
-                        <h2 className='m-2'>Verificar Cadastro</h2>
-                        <input
-                        className='m-3'
-                        type="text"
-                        placeholder='Nome do cliente'
-                        id=""
-                        value={obterNomeProduto}
-                        onChange={(campo) => {
-                            definirNomeProduto(campo.target.value)
-                        }} />
+                        <div className='d-flex justify-content-center'>
+                            <h2 className='m-2'>Verificar Cadastro de produtos</h2>
+                            <input
+                            className='m-3'
+                            type="text"
+                            placeholder='Produto'
+                            id=""
+                            value={obterNomeProduto}
+                            onChange={(campo) => {
+                                definirNomeProduto(campo.target.value)
+                            }} />
+                        </div>
                     </div>
-                </div>
                 
-                    {obterDados?.nome === obterNomeProduto
-                    ?
-                    <Respform nome={obterDados.nome} email={obterDados.email} telefone={obterDados.telefone}/>
-                    :<div></div>}
+                        {obterDados?.nome === obterNomeProduto          //Se o nome do produto for igual ao nome do produto
+                        ? //se true
+                    
+                        <Respform
+                            nome={obterDados.nome}
+                            descricao={obterDados.descricao}
+                            preco={obterDados.preco}
+                            quantidade={obterDados.quantidade}
+                            tipo='produtos'/>
+                        :<div></div>/*nada (false)*/}
+                </div>
+                <div className='d-flex justify-content-center'>
+                    <CadastrarProdutos api='produtos'/>
+                </div>
             </div>
-            <CadastrarProdutos api='produtos'>
-            </CadastrarProdutos>
         </Visual>
     )
 }
 
-export let getServerSideProps = (context) => {
+export let getServerSideProps = (context) => { //Função que retorna os dados da página
     return { props: { variavel: context.query.produtos } }
 }
 
